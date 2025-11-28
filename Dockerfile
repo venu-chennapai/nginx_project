@@ -1,11 +1,11 @@
 # Use official Nginx image from Docker Hub
 FROM nginx:latest
 
-# Remove default nginx static assets
+# Remove default nginx static assets (optional)
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy your website files to Nginx folder
-COPY ./html /usr/share/nginx/html
+# Copy website files into container
+COPY html/ /usr/share/nginx/html/
 
 # Expose port 80
 EXPOSE 80
