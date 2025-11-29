@@ -1,23 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx_project
-  labels:
-    app: nginx_project_app
+  name: nginx-project
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx_project_app
+      app: nginx-project
   template:
     metadata:
       labels:
-        app: nginx_project_app
-        team: snginx_project_app_team
+        app: nginx-project
     spec:
       containers:
-      - name: nginx_project_app
-        image: venu8179/nginx_app
-        imagePullPolicy: Always
-        ports:
-          - containers: 80
+        - name: nginx
+          image: venu8179/nginx_app:latest
+          ports:
+            - containerPort: 80
