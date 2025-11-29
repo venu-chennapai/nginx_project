@@ -2,11 +2,15 @@
   become: true
   tasks:
     - name: Create new deployment
-      command: kubectl apply -f /home/ubuntu/nginx_project_kubernetes_home/nginx_project_app_Deployment.yml
+      command: kubectl apply -f nginx_project_app_Deployment.yml
       args:
         chdir: /home/ubuntu/nginx_project_kubernetes_home
+      environment:
+        KUBECONFIG: /home/ubuntu/.kube/config
 
     - name: Create new service
-      command: kubectl apply -f /home/ubuntu/nginx_project_kubernetes_home/nginx_project_app_Service.yml
+      command: kubectl apply -f nginx_project_app_Service.yml
       args:
         chdir: /home/ubuntu/nginx_project_kubernetes_home
+      environment:
+        KUBECONFIG: /home/ubuntu/.kube/config
