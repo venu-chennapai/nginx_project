@@ -1,8 +1,12 @@
-- hosts: all
+- hosts: kubernetes
   become: true
   tasks:
-    - name: create new deployment
+    - name: Create new deployment
       command: kubectl apply -f /home/ubuntu/nginx_project_kubernetes_home/nginx_project_app_Deployment.yml
+      args:
+        chdir: /home/ubuntu/nginx_project_kubernetes_home
 
-    - name: create new service
+    - name: Create new service
       command: kubectl apply -f /home/ubuntu/nginx_project_kubernetes_home/nginx_project_app_Service.yml
+      args:
+        chdir: /home/ubuntu/nginx_project_kubernetes_home
