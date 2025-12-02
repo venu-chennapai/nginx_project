@@ -1,0 +1,73 @@
+##### This is tool based flow #####
+
+GitHub → Jenkins → Ansible → Docker → Kubeadm-Kubernetes cluster → Dynatrace monitoring
+│
+└── Deploy nginx app → Expose via NodePort
+
+********************************************************************************************************************
+##### This is step by step flow #####
+
+Start
+ │
+ ▼
+Provision Ubuntu EC2 Instance  (t3.large - 2 vCPU, 8 GB RAM)
+ │
+ ▼
+Install Kubernetes (Kubeadm Cluster Setup)
+ │
+ ▼
+Initialize Kubernetes Cluster (kubeadm init)
+ │
+ ▼
+Setup Kubectl & Kubeconfig on master
+ │
+ ▼
+Install Container Runtime (containerd / docker)
+ │
+ ▼
+Install CNI Plugin (Calico / Flannel)
+ │
+ ▼
+Node Ready ✔
+ │
+ ▼
+Deploy Sample Application (nginx / myapp)
+ │
+ ▼
+Install Dynatrace Operator
+   → Helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator
+ │
+ ▼
+Create Dynatrace Operator Token + Data Ingest Token
+ │
+ ▼
+Create & Apply dynakube.yaml
+   → kubectl apply -f dynakube.yml
+ │
+ ▼
+Dynatrace components deployed in dynatrace namespace:
+   - dynatrace-operator
+   - dynatrace-webhook
+   - dynatrace-oneagent-csi-driver
+   - dynatrace-activegate
+   - dynatrace-otel-collector
+ │
+ ▼
+ActiveGate + OneAgent Successfully Running
+ │
+ ▼
+Cluster connected to Dynatrace SaaS Console
+ │
+ ▼
+Cluster appears under **Infrastructure → Kubernetes**
+ │
+ ▼
+Monitoring Enabled (Workloads, Pods, Nodes, Metrics)
+ │
+ ▼
+Deploy nginx and access externally using NodePort
+ │
+ ▼
+SUCCESS 🎉 On-Prem Dynatrace + Kubernetes FULL Monitoring Live!
+ │
+End
